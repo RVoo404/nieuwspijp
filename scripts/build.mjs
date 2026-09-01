@@ -38,7 +38,7 @@ const layout = ({ title, description, body, image }) => `<!doctype html>
     </div>
   </header>
   ${body}
-  <footer class="site-footer"><div class="site-footer__inner">© ${new Date().getFullYear()} Nieuwspijp · Satirische nieuwswebsite</div></footer>
+  <footer class="site-footer"><div class="site-footer__inner">© ${new Date().getFullYear()} Nieuwspijp</div></footer>
   <script src="/assets/site.js" defer></script>
 </body>
 </html>`;
