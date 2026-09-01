@@ -1,4 +1,5 @@
 import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -6,6 +7,10 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = path.join(root, 'content', 'articles');
 const assetsDir = path.join(root, 'src', 'assets');
 const distDir = path.join(root, 'dist');
+
+const assetVersion = (contents) => createHash('sha256').update(contents).digest('hex').slice(0, 10);
+const cssVersion = assetVersion(await readFile(path.join(assetsDir, 'site.css')));
+const jsVersion = assetVersion(await readFile(path.join(assetsDir, 'site.js')));
 
 const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
@@ -20,13 +25,14 @@ const layout = ({ title, description, body, image }) => `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
   <meta property="og:type" content="${image ? 'article' : 'website'}">
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   ${image ? `<meta property="og:image" content="${escapeHtml(image)}">` : ''}
-  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/site.css?v=${cssVersion}">
 </head>
 <body>
   <a class="skip-link" href="#inhoud">Ga naar de inhoud</a>
@@ -39,7 +45,7 @@ const layout = ({ title, description, body, image }) => `<!doctype html>
   </header>
   ${body}
   <footer class="site-footer"><div class="site-footer__inner">© ${new Date().getFullYear()} Nieuwspijp</div></footer>
-  <script src="/assets/site.js" defer></script>
+  <script src="/assets/site.js?v=${jsVersion}" defer></script>
 </body>
 </html>`;
 
