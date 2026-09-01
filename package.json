@@ -1,0 +1,11 @@
+{
+  "name": "nieuwspijp",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Onderhoudsarme statische nieuwswebsite voor Nieuwspijp",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "start": "node scripts/serve.mjs"
+  }
+}

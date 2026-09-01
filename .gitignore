@@ -1,0 +1,10 @@
+dist/
+.DS_Store
+Thumbs.db
+*.log
+.env
+.dev.vars
+.wrangler/
+.idea/
+.vscode/
+
