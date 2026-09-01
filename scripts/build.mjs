@@ -16,6 +16,9 @@ const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;').replaceAll("'", '&#039;');
 
+const renderInlineMarkdown = (value = '') => escapeHtml(value)
+  .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
 const formatDate = (iso) => new Intl.DateTimeFormat('nl-NL', {
   day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Amsterdam'
 }).format(new Date(`${iso}T12:00:00+02:00`));
@@ -97,7 +100,7 @@ for (const article of articles) {
       <div class="article__meta"><time class="date" datetime="${escapeHtml(article.date)}">${formatDate(article.date)}</time><button class="share" type="button" data-share>Deel dit artikel</button></div>
     </header>
     <img class="article__hero" src="/${escapeHtml(article.image)}" alt="${escapeHtml(article.imageAlt || '')}">
-    <div class="article__content">${article.body.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('\n')}</div>
+    <div class="article__content">${article.body.map((paragraph) => `<p>${renderInlineMarkdown(paragraph)}</p>`).join('\n')}</div>
     <a class="back-link" href="/">← Terug naar de homepage</a>
   </article></main>`;
   await writeFile(path.join(articleDir, 'index.html'), layout({ title: `${article.title} — Nieuwspijp`, description: article.intro || article.title, image: `/${article.image}`, body }), 'utf8');
