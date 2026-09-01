@@ -34,7 +34,7 @@ const layout = ({ title, description, body, image }) => `<!doctype html>
     <div class="masthead__top"></div>
     <div class="masthead__inner">
       <a class="wordmark" href="/" aria-label="Nieuwspijp, naar de homepage">Nieuwspijp<span class="wordmark__dot">.</span></a>
-      <p class="masthead__tagline">Satirisch nieuws, serieus gebracht</p>
+      <p class="masthead__tagline">Altijd het laatste orgelnieuws</p>
     </div>
   </header>
   ${body}
