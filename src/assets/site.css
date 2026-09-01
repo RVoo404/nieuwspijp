@@ -9,9 +9,25 @@
   --max: 1180px;
 }
 
+html { color-scheme: light; }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f1eee6;
+    --muted: #abb5ad;
+    --paper: #101512;
+    --panel: #1b231e;
+    --line: #3b463f;
+    --brand: #70cba6;
+    --accent: #ff7959;
+  }
+
+  html { color-scheme: dark; }
+}
+
 * { box-sizing: border-box; }
 
-html { color-scheme: light; scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
