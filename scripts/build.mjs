@@ -88,7 +88,7 @@ const homeBody = `<main class="page" id="inhoud">
   <h1 class="page-title">Het laatste nieuws</h1>
   ${articles.length ? `<section class="article-grid" aria-label="Artikelen">${cards}</section>` : `<section class="empty-state"><h2>Nog geen artikelen gepubliceerd</h2><p>De redactionele inhoud wordt binnenkort toegevoegd. Nieuwspijp publiceert alleen definitief aangeleverde artikelen en afbeeldingen.</p></section>`}
 </main>`;
-await writeFile(path.join(distDir, 'index.html'), layout({ title: 'Nieuwspijp — Satirisch nieuws', description: 'Nieuwspijp brengt satirisch nieuws in een serieuze jas.', body: homeBody }), 'utf8');
+await writeFile(path.join(distDir, 'index.html'), layout({ title: 'Nieuwspijp – Altijd het laatste orgelnieuws', description: 'Opmerkelijk orgelnieuws uit binnen- en buitenland.', body: homeBody }), 'utf8');
 
 for (const article of articles) {
   const articleDir = path.join(distDir, 'artikelen', article.slug);
