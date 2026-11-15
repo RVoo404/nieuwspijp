@@ -106,5 +106,13 @@ for (const article of articles) {
   await writeFile(path.join(articleDir, 'index.html'), layout({ title: `${article.title} — Nieuwspijp`, description: article.intro || article.title, image: `/${article.image}`, body }), 'utf8');
 }
 
+const notFoundBody = `<main class="page" id="inhoud">
+  <span class="section-kicker">Nieuwspijp</span>
+  <h1 class="page-title">Pagina niet gevonden</h1>
+  <p>Deze pagina bestaat niet of is verwijderd.</p>
+  <a class="back-link" href="/">← Naar de homepage</a>
+</main>`;
+await writeFile(path.join(distDir, '404.html'), layout({ title: 'Pagina niet gevonden — Nieuwspijp', description: 'Deze pagina bestaat niet of is verwijderd.', body: notFoundBody }), 'utf8');
+
 await writeFile(path.join(distDir, '_headers'), `/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n\n/*.html\n  Cache-Control: public, max-age=0, must-revalidate\n`, 'utf8');
 console.log(`Website gebouwd: ${articles.length} artikel(en).`);
